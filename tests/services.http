@@ -1,0 +1,65 @@
+POST localhost:3003/obat/kategori/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nama_kategori_obat" : "obat jamu bakar 4000"
+}
+
+###
+GET localhost:3003/obat/kategori/
+Content-Type: application/json
+Accept: application/json
+
+###
+GET localhost:3003/obat/kategori/3
+Content-Type: application/json
+Accept: application/json
+
+###
+GET localhost:3003/obat/kategori/count
+Content-Type: application/json
+Accept: application/json
+
+
+###
+PUT localhost:3003/obat/kategori/5
+Content-Type: application/json
+Accept: application/json
+
+{
+"nama_kategori_obat" : "JAMUR HUFAGRIP 5000"
+}
+
+###
+DELETE localhost:3003/obat/kategori/4
+
+###
+POST localhost:3003/obat/post
+
+### OBAT
+POST /obat/post HTTP/1.1
+Host: localhost:3003
+Content-Length: 537
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="/C:/Users/neko/Documents/Projek/PA/user/tests/file/image.jpg"
+Content-Type: image/jpeg
+
+(data)
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+  "kategori_obat" : [1, 2, 3],
+  "data_obat" : {
+    "nama_obat" : "oryza magenta",
+    "dosis_obat" : "sesuai resep dokter",
+    "bentuk_sediaan" : "cair",
+    "harga" : 50000.0
+  }
+}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

@@ -1,0 +1,68 @@
+POST localhost:3003/user/signup
+Accept: application/json
+Content-Type: application/json
+Authorization: 4de01cba63c36c15328bf7603c9ae2118ef020cbe7a4c3f46e6dfd01d8f3af49
+
+{
+  "name": "Nania",
+  "email": "nania@mulutgkbisadijaga.com",
+  "password" : "vanesa"
+}
+
+### RIGHT CREDENTIAL
+POST localhost:3003/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password" : "abc123"
+}
+
+### WRONG
+POST localhost:3003/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "michaelholmes@apotekduma.com",
+  "password" : "marjan"
+}
+
+### UPDATE TOKEN
+POST localhost:3003/auth/logout
+Authorization: 0fc4d4857f299c5f037a74b6f98a646c5bd2ff0357ad8dacf3435b32e2a0f52a
+
+###### WHOLE GODDAMN TEST
+
+### LOGIN AGAIN
+POST localhost:3003/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "abc123"
+}
+
+###
+POST localhost:3003/user/signup
+Accept: application/json
+Content-Type: application/json
+Authorization: b8c758aeeb59187c4bb8f2851839ab15c1ff4b8b9cd0205db222cb1f4f000c70
+
+{
+"name": "margarethtatchers",
+"email": "michaelholmes2@apotekduma.com",
+"password" : "martian"
+}
+
+### LOGIN AGAIN
+POST localhost:3003/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "michaelholmes@apotekduma.com",
+  "password": "martian"
+}
