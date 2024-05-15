@@ -134,9 +134,9 @@ func CreateUser(ctx *fiber.Ctx) error {
 	// and then check if the user based on the user id has owner priviledged.
 	if userwhoadd.Role == 99 { // if the role is owner (0)
 		userdata.Role = 1 // override the role settings
-		userdata.Password, err = helper.PasswordHash(userdata.Password)
 
 		if userdata.Password != "" && userdata.Email != "" {
+			userdata.Password, err = helper.PasswordHash(userdata.Password)
 			err = db.Create(&userdata).Error
 
 			if err != nil {
@@ -153,7 +153,7 @@ func CreateUser(ctx *fiber.Ctx) error {
 		} else {
 			return ctx.Status(500).JSON(fiber.Map{
 				"status": 500,
-				"error":  "the user's email and password is empty",
+				"error":  "the user's email or password is empty",
 			})
 		}
 

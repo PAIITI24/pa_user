@@ -7,13 +7,13 @@ import (
 )
 
 var (
-	ProdukStoragePublicURL = ""
-	ObatStoragePublicURL   = ""
+	ProdukStoragePublicURL = "https://pub-0ff5a5aa7c354d8f91aecebb73dbcf95.r2.dev"
+	ObatStoragePublicURL   = "https://pub-a6d879b3e38f4fe0b2f3beb986236466.r2.dev"
 	ObatBucketName         = "gambarobat"
 	ProdukBucketName       = "gambarproduk"
-	endpoint               = ""
-	accessKeyID            = ""
-	secretKey              = ""
+	endpoint               = "23e6cc54af99f15b0d42f07eb55e0db7.r2.cloudflarestorage.com"
+	accessKeyID            = "bd59c36fa19d23d8520f17035326c060"
+	secretKey              = "e9e958d5d105a62c9488c1d7afd25a5ccdae344689a071ecdab11748a8af4c33"
 	useSSL                 = true
 )
 
