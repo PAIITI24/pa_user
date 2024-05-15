@@ -57,8 +57,8 @@ func ReqAddProduk(ctx *fiber.Ctx) error {
 	// preparing a client
 	agent := fiber.Post(helper.ProdukServiceHostname + "/produk/")
 
-	data.DataProduk.Gambar = helper.StoragePublicURL + "/" + objectName // adding gambar URL before sending it
-	agent.JSON(data)                                                    // push push push
+	data.DataProduk.Gambar = helper.ProdukStoragePublicURL + "/" + objectName // adding gambar URL before sending it
+	agent.JSON(data)                                                          // push push push
 
 	s, b, e := agent.Bytes()
 
@@ -165,8 +165,8 @@ func ReqUpdateProduk(ctx *fiber.Ctx) error {
 	// preparing a client
 	agent := fiber.Put(helper.ProdukServiceHostname + "/produk/" + ctx.Params("id"))
 
-	data.Gambar = helper.StoragePublicURL + "/" + objectName // adding gambar URL before sending it
-	agent.JSON(data)                                         // push push push
+	data.Gambar = helper.ProdukStoragePublicURL + "/" + objectName // adding gambar URL before sending it
+	agent.JSON(data)                                               // push push push
 
 	s, b, e := agent.Bytes()
 

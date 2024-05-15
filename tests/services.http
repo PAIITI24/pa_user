@@ -63,3 +63,95 @@ Content-Type: application/json
 }
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+#################
+POST localhost:3003/produk/kategori
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id" : 1,
+  "nama_kategori_produk" : "obat jamu"
+}
+
+###
+
+POST localhost:3003/produk/kategori
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nama_kategori_produk" : "obat kencur"
+}
+
+###
+
+POST localhost:3003/produk/kategori
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nama_kategori_produk" : "obat jahe"
+}
+
+###
+
+GET localhost:3003/produk/kategori
+Accept: application/json
+
+###
+
+GET localhost:3003/produk/kategori/3
+Accept: application/json
+
+###
+
+PUT localhost:3002/produk/kategori/3
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nama_kategori_produk" : "obat baru anak maokma"
+}
+
+###
+
+DELETE localhost:3002/produk/kategori/6
+
+##############
+POST localhost:3002/produk/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "kategori_produk" : [1,2,3],
+  "data_produk" : {
+    "nama_obat" : "alat kecantikan 1000",
+    "harga" : 50000.0,
+    "deskripsi" : "alat kecatikan auto cantik"
+  }
+}
+
+###
+
+PUT localhost:3002/produk/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nama_obat" : "alat kecantikan 1000 oryza p!nk",
+  "harga" : 1250000.0,
+  "deskripsi" : "alat kecatikan auto cantik forever"
+}
+
+###
+
+GET localhost:3002/produk/
+
+###
+
+GET localhost:3002/produk/1
+
+###
+
+DELETE localhost:3002/produk/1

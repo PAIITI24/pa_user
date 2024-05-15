@@ -73,20 +73,20 @@ func main() {
 	obat.Delete("/:id", service.ReqDeleteObat)
 
 	// kategori produk
-	produk := server.Group("/obat")
-	produk.Post("/kategori/", nil)
-	produk.Get("/kategori/:id", nil)
-	produk.Get("/kategori/", nil)
-	produk.Put("/kategori/:id", nil)
-	produk.Delete("/kategori/:id", nil)
-	produk.Get("/kategori/count", nil)
+	produk := server.Group("/produk")
+	produk.Post("/kategori/", service.ReqAddKategoriProduk)
+	produk.Get("/kategori/:id", service.ReqGetKategoriProduk)
+	produk.Get("/kategori/", service.ReqListKategoriProduk)
+	produk.Put("/kategori/:id", service.ReqUpdateKategoriProduk)
+	produk.Delete("/kategori/:id", service.ReqDeleteKategoriObat)
+	produk.Get("/kategori/count", service.ReqCountKategoriProduk)
 
 	// obat
-	produk.Post("/", service.ReqAddObat)
-	produk.Get("/", service.ReqListObat)
-	produk.Get("/:id", service.ReqGetObat)
-	produk.Put("/:id", service.ReqUpdateObat)
-	produk.Delete("/:id", service.ReqDeleteObat)
+	produk.Post("/", service.ReqAddProduk)
+	produk.Get("/", service.ReqListProduk)
+	produk.Get("/:id", service.ReqGetProduk)
+	produk.Put("/:id", service.ReqUpdateProduk)
+	produk.Delete("/:id", service.ReqDeleteProduk)
 
 	server.Listen(":3003")
 }

@@ -58,8 +58,8 @@ func ReqAddObat(ctx *fiber.Ctx) error {
 	// preparing a client
 	agent := fiber.Post(helper.ObatServiceHostname + "/obat/")
 
-	data.DataObat.Gambar = helper.StoragePublicURL + "/" + objectName // adding gambar URL before sending it
-	agent.JSON(data)                                                  // push push push
+	data.DataObat.Gambar = helper.ObatStoragePublicURL + "/" + objectName // adding gambar URL before sending it
+	agent.JSON(data)                                                      // push push push
 
 	s, b, e := agent.Bytes()
 
@@ -166,8 +166,8 @@ func ReqUpdateObat(ctx *fiber.Ctx) error {
 	// preparing a client
 	agent := fiber.Put(helper.ObatServiceHostname + "/obat/" + ctx.Params("id"))
 
-	data.Gambar = helper.StoragePublicURL + "/" + objectName // adding gambar URL before sending it
-	agent.JSON(data)                                         // push push push
+	data.Gambar = helper.ObatStoragePublicURL + "/" + objectName // adding gambar URL before sending it
+	agent.JSON(data)                                             // push push push
 
 	s, b, e := agent.Bytes()
 
