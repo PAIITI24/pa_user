@@ -72,21 +72,29 @@ func main() {
 	obat.Put("/:id", service.ReqUpdateObat)
 	obat.Delete("/:id", service.ReqDeleteObat)
 
-	// kategori produk
-	produk := server.Group("/produk")
-	produk.Post("/kategori/", service.ReqAddKategoriProduk)
-	produk.Get("/kategori/:id", service.ReqGetKategoriProduk)
-	produk.Get("/kategori/", service.ReqListKategoriProduk)
-	produk.Put("/kategori/:id", service.ReqUpdateKategoriProduk)
-	produk.Delete("/kategori/:id", service.ReqDeleteKategoriObat)
-	produk.Get("/kategori/count", service.ReqCountKategoriProduk)
+	// stok barang
+	obat.Put("/stok/add", service.AddStokObat)
+	obat.Put("/stok/reduce", service.ReduceStokObat)
 
-	// obat
-	produk.Post("/", service.ReqAddProduk)
-	produk.Get("/", service.ReqListProduk)
-	produk.Get("/:id", service.ReqGetProduk)
-	produk.Put("/:id", service.ReqUpdateProduk)
-	produk.Delete("/:id", service.ReqDeleteProduk)
+	// kategori barang
+	barang := server.Group("/barang")
+	barang.Post("/kategori/", service.ReqAddKategoriBarang)
+	barang.Get("/kategori/:id", service.ReqGetKategoriBarang)
+	barang.Get("/kategori/", service.ReqListKategoriBarang)
+	barang.Put("/kategori/:id", service.ReqUpdateKategoriBarang)
+	barang.Delete("/kategori/:id", service.ReqDeleteKategoriBarang)
+	barang.Get("/kategori/count", service.ReqCountKategoriBarang)
+
+	// barang
+	barang.Post("/", service.ReqAddBarang)
+	barang.Get("/", service.ReqListBarang)
+	barang.Get("/:id", service.ReqGetBarang)
+	barang.Put("/:id", service.ReqUpdateBarang)
+	barang.Delete("/:id", service.ReqDeleteBarang)
+
+	// stok barang
+	barang.Put("/stok/add", service.AddStokBarang)
+	barang.Put("/stok/reduce", service.ReduceStokBarang)
 
 	server.Listen(":3003")
 }

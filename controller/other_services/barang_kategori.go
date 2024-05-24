@@ -7,9 +7,9 @@ import (
 	"github.com/hakushigo/pa_user/model/packets"
 )
 
-func ReqAddKategoriProduk(ctx *fiber.Ctx) error {
+func ReqAddKategoriBarang(ctx *fiber.Ctx) error {
 	// recieve an input of kategori
-	var input packets.KategoriProduk
+	var input packets.KategoriBarang
 	if err := ctx.BodyParser(&input); err != nil {
 		return ctx.Status(500).JSON(fiber.Map{
 			"status": 500,
@@ -24,7 +24,7 @@ func ReqAddKategoriProduk(ctx *fiber.Ctx) error {
 		})
 	}
 
-	agent := fiber.Post(helper.ProdukServiceHostname + "/produk/kategori")
+	agent := fiber.Post(helper.BarangServiceHostname + "/barang/kategori")
 	agent.JSON(input)
 
 	status, body, errors := agent.Bytes()
@@ -40,8 +40,8 @@ func ReqAddKategoriProduk(ctx *fiber.Ctx) error {
 	return ctx.Status(status).Send(body)
 }
 
-func ReqListKategoriProduk(ctx *fiber.Ctx) error {
-	agent := fiber.Get(helper.ProdukServiceHostname + "/produk/kategori")
+func ReqListKategoriBarang(ctx *fiber.Ctx) error {
+	agent := fiber.Get(helper.BarangServiceHostname + "/barang/kategori")
 	status, body, errors := agent.Bytes()
 
 	if len(errors) > 0 {
@@ -55,8 +55,8 @@ func ReqListKategoriProduk(ctx *fiber.Ctx) error {
 	return ctx.Status(status).Send(body)
 }
 
-func ReqGetKategoriProduk(ctx *fiber.Ctx) error {
-	agent := fiber.Get(helper.ProdukServiceHostname + "/produk/kategori/" + ctx.Params("id"))
+func ReqGetKategoriBarang(ctx *fiber.Ctx) error {
+	agent := fiber.Get(helper.BarangServiceHostname + "/barang/kategori/" + ctx.Params("id"))
 	status, body, errors := agent.Bytes()
 
 	if len(errors) > 0 {
@@ -70,8 +70,8 @@ func ReqGetKategoriProduk(ctx *fiber.Ctx) error {
 	return ctx.Status(status).Send(body)
 }
 
-func ReqUpdateKategoriProduk(ctx *fiber.Ctx) error {
-	var input packets.KategoriProduk
+func ReqUpdateKategoriBarang(ctx *fiber.Ctx) error {
+	var input packets.KategoriBarang
 
 	if err := ctx.BodyParser(&input); err != nil {
 		return ctx.Status(500).JSON(fiber.Map{
@@ -88,7 +88,7 @@ func ReqUpdateKategoriProduk(ctx *fiber.Ctx) error {
 	}
 
 	id := ctx.Params("id")
-	agent := fiber.Put(helper.ProdukServiceHostname + "/produk/kategori/" + id)
+	agent := fiber.Put(helper.BarangServiceHostname + "/barang/kategori/" + id)
 	agent.JSON(input)
 
 	status, body, errors := agent.Bytes()
@@ -103,8 +103,8 @@ func ReqUpdateKategoriProduk(ctx *fiber.Ctx) error {
 	return ctx.Status(status).Send(body)
 }
 
-func ReqCountKategoriProduk(ctx *fiber.Ctx) error {
-	agent := fiber.Get(helper.ProdukServiceHostname + "/produk/kategori")
+func ReqCountKategoriBarang(ctx *fiber.Ctx) error {
+	agent := fiber.Get(helper.BarangServiceHostname + "/barang/kategori")
 
 	_, body, errors := agent.Bytes()
 	if len(errors) > 0 {
@@ -114,8 +114,8 @@ func ReqCountKategoriProduk(ctx *fiber.Ctx) error {
 		})
 	}
 
-	var listOfKategoriProduk []packets.KategoriProduk
-	err := json.Unmarshal(body, &listOfKategoriProduk)
+	var listOfKategoriBarang []packets.KategoriBarang
+	err := json.Unmarshal(body, &listOfKategoriBarang)
 	if err != nil {
 		return ctx.Status(500).JSON(fiber.Map{
 			"status": 500,
@@ -125,12 +125,12 @@ func ReqCountKategoriProduk(ctx *fiber.Ctx) error {
 
 	return ctx.Status(200).JSON(fiber.Map{
 		"status": 200,
-		"count":  len(listOfKategoriProduk),
+		"count":  len(listOfKategoriBarang),
 	})
 }
 
-func ReqDeleteKategoriProduk(ctx *fiber.Ctx) error {
-	agent := fiber.Delete(helper.ProdukServiceHostname + "/produk/kategori/" + ctx.Params("id"))
+func ReqDeleteKategoriBarang(ctx *fiber.Ctx) error {
+	agent := fiber.Delete(helper.BarangServiceHostname + "/barang/kategori/" + ctx.Params("id"))
 	status, body, errors := agent.Bytes()
 
 	if len(errors) > 0 {

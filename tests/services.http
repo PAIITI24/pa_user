@@ -3,16 +3,16 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "nama_kategori_obat" : "obat jamu bakar 4000"
+  "nama_kategori_obat" : "balai pantat kuda 3"
 }
 
 ###
-GET localhost:3003/obat/kategori/
+GET https://0ce6-114-10-87-234.ngrok-free.app/obat/kategori/
 Content-Type: application/json
 Accept: application/json
 
 ###
-GET localhost:3003/obat/kategori/3
+GET localhost:3003/obat/
 Content-Type: application/json
 Accept: application/json
 
@@ -65,67 +65,67 @@ Content-Type: application/json
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 #################
-POST localhost:3003/produk/kategori
+POST localhost:3003/barang/kategori
 Content-Type: application/json
 Accept: application/json
 
 {
   "id" : 1,
-  "nama_kategori_produk" : "obat jamu"
+  "nama_kategori_barang" : "obat jamu"
 }
 
 ###
 
-POST localhost:3003/produk/kategori
+POST localhost:3003/barang/kategori
 Content-Type: application/json
 Accept: application/json
 
 {
-  "nama_kategori_produk" : "obat kencur"
+  "nama_kategori_barang" : "obat kencur"
 }
 
 ###
 
-POST localhost:3003/produk/kategori
+POST localhost:3003/barang/kategori
 Content-Type: application/json
 Accept: application/json
 
 {
-  "nama_kategori_produk" : "obat jahe"
+  "nama_kategori_barang" : "obat jahe"
 }
 
 ###
 
-GET localhost:3003/produk/kategori
+GET localhost:3003/barang/kategori
 Accept: application/json
 
 ###
 
-GET localhost:3003/produk/kategori/3
+GET localhost:3003/barang/kategori/3
 Accept: application/json
 
 ###
 
-PUT localhost:3002/produk/kategori/3
+PUT localhost:3003/barang/kategori/3
 Content-Type: application/json
 Accept: application/json
 
 {
-  "nama_kategori_produk" : "obat baru anak maokma"
+  "nama_kategori_barang" : "obat baru anak maokma"
 }
 
 ###
 
-DELETE localhost:3002/produk/kategori/6
+DELETE localhost:3003/barang/kategori/6
 
 ##############
-POST localhost:3002/produk/
+POST localhost:3003/barang/
 Content-Type: application/json
 Accept: application/json
 
 {
-  "kategori_produk" : [1,2,3],
-  "data_produk" : {
+  "kategori_barang" : [1,2,3],
+  "data_barang" : {
     "nama_obat" : "alat kecantikan 1000",
     "harga" : 50000.0,
     "deskripsi" : "alat kecatikan auto cantik"
@@ -134,24 +134,90 @@ Accept: application/json
 
 ###
 
-PUT localhost:3002/produk/1
+PUT localhost:3003/barang/1
 Content-Type: application/json
 Accept: application/json
 
 {
-  "nama_obat" : "alat kecantikan 1000 oryza p!nk",
-  "harga" : 1250000.0,
+  "nama_obat" : "alat kecantikan 1000 oryza p!nk jerman",
+  "harga" : 1950000.0,
   "deskripsi" : "alat kecatikan auto cantik forever"
 }
 
 ###
 
-GET localhost:3002/produk/
+GET localhost:3003/barang/
 
 ###
 
-GET localhost:3002/produk/1
+GET localhost:3003/barang/1
 
 ###
 
-DELETE localhost:3002/produk/1
+DELETE localhost:3003/barang/2
+
+######################################
+
+PUT localhost:3003/barang/stok/add
+Accept: application/json
+Content-Type: application/json
+
+//ObatID      int       `json:"obat_id"`
+//Amount      uint      `json:"amount"`
+//ExpiredDate time.Time `json:"expired_date"`
+
+
+{
+  "barang_id": 1,
+  "amount": 10,
+  "expired_date": "19-12-2025"
+}
+
+###
+PUT localhost:3003/barang/stok/reduce
+Accept: application/json
+Content-Type: application/json
+
+//ObatID      int       `json:"obat_id"`
+//Amount      uint      `json:"amount"`
+//ExpiredDate time.Time `json:"expired_date"`
+
+
+{
+  "barang_id": 1,
+  "amount": 31,
+  "expired_date": "19-12-2025"
+}
+
+######################################
+
+PUT localhost:3003/obat/stok/add
+Accept: application/json
+Content-Type: application/json
+
+//ObatID      int       `json:"obat_id"`
+//Amount      uint      `json:"amount"`
+//ExpiredDate time.Time `json:"expired_date"`
+
+
+{
+  "obat_id": 1,
+  "amount": 10,
+  "expired_date": "19-12-2025"
+}
+
+###
+PUT localhost:3003/obat/stok/reduce
+Accept: application/json
+Content-Type: application/json
+
+//ObatID      int       `json:"obat_id"`
+//Amount      uint      `json:"amount"`
+//ExpiredDate time.Time `json:"expired_date"`
+
+
+{
+  "obat_id": 4,
+  "amount": 10,
+  "expired_date": "19-12-2025"
+}

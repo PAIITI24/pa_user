@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 )
 
-func ReqAddProduk(ctx *fiber.Ctx) error {
-	//	var newProduk packets.Produk
+func ReqAddBarang(ctx *fiber.Ctx) error {
+	//	var newBarang packets.Barang
 	form, err := ctx.MultipartForm()
 	if err != nil {
 		return ctx.Status(500).JSON(fiber.Map{
@@ -22,8 +22,8 @@ func ReqAddProduk(ctx *fiber.Ctx) error {
 
 	// extract data
 	var data struct {
-		KategoriProduk []int          `json:"kategori_produk"`
-		DataProduk     packets.Produk `json:"data_produk"`
+		KategoriBarang []int          `json:"kategori_barang"`
+		DataBarang     packets.Barang `json:"data_barang"`
 	}
 
 	if len(form.Value["data"]) == 0 || len(form.File["image"]) == 0 { // check if both data and image is here
@@ -55,9 +55,9 @@ func ReqAddProduk(ctx *fiber.Ctx) error {
 	objectName := helper.GenerateToken(image.Filename) + filepath.Ext(image.Filename)
 
 	// preparing a client
-	agent := fiber.Post(helper.ProdukServiceHostname + "/produk/")
+	agent := fiber.Post(helper.BarangServiceHostname + "/barang/")
 
-	data.DataProduk.Gambar = helper.ProdukStoragePublicURL + "/" + objectName // adding gambar URL before sending it
+	data.DataBarang.Gambar = helper.BarangStoragePublicURL + "/" + objectName // adding gambar URL before sending it
 	agent.JSON(data)                                                          // push push push
 
 	s, b, e := agent.Bytes()
@@ -74,7 +74,7 @@ func ReqAddProduk(ctx *fiber.Ctx) error {
 		S3Client := helper.S3Connect()
 		uploadCTX := context.Background() //S3Context
 
-		_, err = S3Client.PutObject(uploadCTX, helper.ProdukBucketName, objectName, imageContent, image.Size, minio.PutObjectOptions{
+		_, err = S3Client.PutObject(uploadCTX, helper.BarangBucketName, objectName, imageContent, image.Size, minio.PutObjectOptions{
 			ContentType: image.Header.Get("Content-Type"),
 		})
 		if err != nil {
@@ -89,9 +89,9 @@ func ReqAddProduk(ctx *fiber.Ctx) error {
 	return ctx.Status(s).Send(b)
 }
 
-func ReqListProduk(ctx *fiber.Ctx) error {
+func ReqListBarang(ctx *fiber.Ctx) error {
 	// creating an agent
-	agent := fiber.Get(helper.ProdukServiceHostname + "/produk")
+	agent := fiber.Get(helper.BarangServiceHostname + "/barang")
 	status, body, errs := agent.Bytes()
 
 	if len(errs) > 0 {
@@ -105,9 +105,9 @@ func ReqListProduk(ctx *fiber.Ctx) error {
 	return ctx.Status(status).Send(body)
 }
 
-func ReqGetProduk(ctx *fiber.Ctx) error {
+func ReqGetBarang(ctx *fiber.Ctx) error {
 	// creating an agent
-	agent := fiber.Get(helper.ProdukServiceHostname + "/produk/" + ctx.Params("id"))
+	agent := fiber.Get(helper.BarangServiceHostname + "/barang/" + ctx.Params("id"))
 	status, body, errs := agent.Bytes()
 
 	if len(errs) > 0 {
@@ -121,8 +121,8 @@ func ReqGetProduk(ctx *fiber.Ctx) error {
 	return ctx.Status(status).Send(body)
 }
 
-func ReqUpdateProduk(ctx *fiber.Ctx) error {
-	//	var newProduk packets.Produk
+func ReqUpdateBarang(ctx *fiber.Ctx) error {
+	//	var newBarang packets.Barang
 	form, err := ctx.MultipartForm()
 	if err != nil {
 		return ctx.Status(500).JSON(fiber.Map{
@@ -132,7 +132,7 @@ func ReqUpdateProduk(ctx *fiber.Ctx) error {
 	}
 
 	// extract data
-	var data packets.Produk
+	var data packets.Barang
 
 	if len(form.Value["data"]) == 0 || len(form.File["image"]) == 0 { // check if both data and image is here
 		return ctx.Status(500).JSON(fiber.Map{
@@ -163,9 +163,9 @@ func ReqUpdateProduk(ctx *fiber.Ctx) error {
 	objectName := helper.GenerateToken(image.Filename) + filepath.Ext(image.Filename)
 
 	// preparing a client
-	agent := fiber.Put(helper.ProdukServiceHostname + "/produk/" + ctx.Params("id"))
+	agent := fiber.Put(helper.BarangServiceHostname + "/barang/" + ctx.Params("id"))
 
-	data.Gambar = helper.ProdukStoragePublicURL + "/" + objectName // adding gambar URL before sending it
+	data.Gambar = helper.BarangStoragePublicURL + "/" + objectName // adding gambar URL before sending it
 	agent.JSON(data)                                               // push push push
 
 	s, b, e := agent.Bytes()
@@ -182,7 +182,7 @@ func ReqUpdateProduk(ctx *fiber.Ctx) error {
 		S3Client := helper.S3Connect()
 		uploadCTX := context.Background() //S3Context
 
-		_, err = S3Client.PutObject(uploadCTX, helper.ProdukBucketName, objectName, imageContent, image.Size, minio.PutObjectOptions{
+		_, err = S3Client.PutObject(uploadCTX, helper.BarangBucketName, objectName, imageContent, image.Size, minio.PutObjectOptions{
 			ContentType: image.Header.Get("Content-Type"),
 		})
 		if err != nil {
@@ -197,8 +197,8 @@ func ReqUpdateProduk(ctx *fiber.Ctx) error {
 	return ctx.Status(s).Send(b)
 }
 
-func ReqDeleteProduk(ctx *fiber.Ctx) error {
-	agent := fiber.Delete(helper.ProdukServiceHostname + "/produk/" + ctx.Params("id"))
+func ReqDeleteBarang(ctx *fiber.Ctx) error {
+	agent := fiber.Delete(helper.BarangServiceHostname + "/barang/" + ctx.Params("id"))
 	status, body, errs := agent.Bytes()
 
 	if len(errs) > 0 {
