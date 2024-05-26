@@ -5,8 +5,8 @@ Authorization: 4de01cba63c36c15328bf7603c9ae2118ef020cbe7a4c3f46e6dfd01d8f3af49
 
 {
   "name": "Nania",
-  "email": "nania@gmail.com",
-  "password" : ""
+  "email": "nania@daa.com",
+  "password" : "adadada"
 }
 
 ### RIGHT CREDENTIAL
@@ -49,11 +49,11 @@ Content-Type: application/json
 POST localhost:3003/user/signup
 Accept: application/json
 Content-Type: application/json
-Authorization: b8c758aeeb59187c4bb8f2851839ab15c1ff4b8b9cd0205db222cb1f4f000c70
+Authorization: b3b4176eb57207bb75aff9074861b2052036413d8b9c46d8d77bbca9bb1aee3f
 
 {
 "name": "margarethtatchers",
-"email": "michaelholmes2@apotekduma.com",
+"email": "michaelholmes2@adada.com",
 "password" : "martian"
 }
 

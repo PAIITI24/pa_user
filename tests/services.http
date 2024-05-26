@@ -1,13 +1,14 @@
 POST localhost:3003/obat/kategori/
 Content-Type: application/json
 Accept: application/json
+Authorization: 59eff45e161c65c1f7c26e982ca1c60f359e6a668fc80ac47df04071de0fb436
 
 {
   "nama_kategori_obat" : "balai pantat kuda 3"
 }
 
 ###
-GET https://0ce6-114-10-87-234.ngrok-free.app/obat/kategori/
+GET localhost:3003/obat/kategori/
 Content-Type: application/json
 Accept: application/json
 

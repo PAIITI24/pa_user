@@ -89,7 +89,7 @@ func Login(ctx *fiber.Ctx) error {
 				"token":  newToken.Token,
 				"user": fiber.Map{
 					"email": foundUser.Email,
-					"name":  foundUser.Name,
+					"role":  foundUser.Role,
 				},
 			})
 		}

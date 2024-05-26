@@ -10,7 +10,7 @@ import (
 We will do token checking over here.
 */
 
-func token_login(ctx *fiber.Ctx) error {
+func TokenLogin(ctx *fiber.Ctx) error {
 	authorizationKey := ctx.Accepts("Authorization") // get the used auth key
 
 	// try to find the key data

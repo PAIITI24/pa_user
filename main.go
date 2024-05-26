@@ -5,6 +5,7 @@ import (
 	"github.com/hakushigo/pa_user/controller"
 	service "github.com/hakushigo/pa_user/controller/other_services"
 	"github.com/hakushigo/pa_user/helper"
+	"github.com/hakushigo/pa_user/middleware"
 	"github.com/hakushigo/pa_user/model"
 	"time"
 )
@@ -52,12 +53,12 @@ func main() {
 	auth.Post("/logout", controller.Logout)
 
 	// user
-	user := server.Group("/user")
+	user := server.Group("/user", middleware.TokenLogin)
 	user.Post("/signup", controller.CreateUser)
 	user.Post("/delete", controller.DeleteUser)
 
 	// kategori obat
-	obat := server.Group("/obat")
+	obat := server.Group("/obat", middleware.TokenLogin)
 	obat.Post("/kategori/", service.ReqAddKategoriObat)
 	obat.Get("/kategori/:id", service.ReqGetKategoriObat)
 	obat.Get("/kategori/", service.ReqListKategoriObat)
@@ -77,7 +78,7 @@ func main() {
 	obat.Put("/stok/reduce", service.ReduceStokObat)
 
 	// kategori barang
-	barang := server.Group("/barang")
+	barang := server.Group("/barang", middleware.TokenLogin)
 	barang.Post("/kategori/", service.ReqAddKategoriBarang)
 	barang.Get("/kategori/:id", service.ReqGetKategoriBarang)
 	barang.Get("/kategori/", service.ReqListKategoriBarang)
