@@ -38,8 +38,8 @@ func (K *KategoriObat) MarshalJSON() ([]byte, error) {
 	}{
 		ID:               K.ID,
 		NamaKategoriObat: K.NamaKategoriObat,
-		CreatedAt:        K.CreatedAt.Format("02-01-2006"),
-		UpdatedAt:        K.UpdatedAt.Format("02-01-2006"),
+		CreatedAt:        K.CreatedAt.Format("02/01/2006"),
+		UpdatedAt:        K.UpdatedAt.Format("02/01/2006"),
 		Obat:             K.Obat,
 	})
 }
@@ -65,8 +65,8 @@ func (O *Obat) MarshalJSON() ([]byte, error) {
 		BentukSediaan: O.BentukSediaan,
 		Harga:         O.Harga,
 		Gambar:        O.Gambar,
-		CreatedAt:     O.CreatedAt.Format("02-01-2006"),
-		UpdatedAt:     O.UpdatedAt.Format("02-01-2006"),
+		CreatedAt:     O.CreatedAt.Format("02/01/2006"),
+		UpdatedAt:     O.UpdatedAt.Format("02/01/2006"),
 		KategoriObat:  O.KategoriObat,
 	})
 }

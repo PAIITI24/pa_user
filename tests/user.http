@@ -1,13 +1,21 @@
 POST localhost:3003/user/signup
 Accept: application/json
 Content-Type: application/json
-Authorization: 4de01cba63c36c15328bf7603c9ae2118ef020cbe7a4c3f46e6dfd01d8f3af49
+Authorization: 2658223ffdea1c2e91af072fe41d7389d4512678893b79c3b62a01f191de1124
 
-{
-  "name": "Nania",
-  "email": "nania@daa.com",
-  "password" : "adadada"
-}
+{"id":null,"name":"Momon","email":"daadada@dddd.com","password":"babiterbang","role":null}
+
+###
+GET localhost:3003/user/list
+Accept: application/json
+Content-Type: application/json
+Authorization: fbf2a9617850ca59c51e2eb96504d7a269d47679fa5ef6a3d109f725301ea2c8
+
+###
+GET localhost:3003/user/details/2
+Accept: application/json
+Content-Type: application/json
+Authorization: fbf2a9617850ca59c51e2eb96504d7a269d47679fa5ef6a3d109f725301ea2c8
 
 ### RIGHT CREDENTIAL
 POST localhost:3003/auth/login

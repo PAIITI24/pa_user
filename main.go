@@ -11,7 +11,6 @@ import (
 )
 
 func main() {
-
 	// Migrate table
 	helper.Migrator()
 
@@ -55,7 +54,10 @@ func main() {
 	// user
 	user := server.Group("/user", middleware.TokenLogin)
 	user.Post("/signup", controller.CreateUser)
-	user.Post("/delete", controller.DeleteUser)
+	user.Delete("/:id", controller.DeleteUser)
+	user.Get("/list", controller.ListStaff)
+	user.Get("/details/:id", controller.GetStaff)
+	user.Put("/update/:id", controller.UpdateStaff)
 
 	// kategori obat
 	obat := server.Group("/obat", middleware.TokenLogin)
