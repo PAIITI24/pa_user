@@ -148,14 +148,17 @@ Accept: application/json
 ###
 
 GET localhost:3003/barang/
-
+Authorization: 490310292d05c57b1eff32097db3de65b5ee837c7874fa106566efbd64e701e8
 ###
 
 GET localhost:3003/barang/1
 
 ###
 
-DELETE localhost:3003/barang/2
+DELETE localhost:3003/obat/4
+Content-Type: application/json
+Accept: application/json
+Authorization: 59eff45e161c65c1f7c26e982ca1c60f359e6a668fc80ac47df04071de0fb436
 
 ######################################
 
