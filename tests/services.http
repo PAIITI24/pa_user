@@ -24,9 +24,10 @@ Accept: application/json
 
 
 ###
-PUT localhost:3003/obat/kategori/5
+PUT localhost:3003/obat/kategori/2
 Content-Type: application/json
 Accept: application/json
+Authorization: abc123
 
 {
 "nama_kategori_obat" : "JAMUR HUFAGRIP 5000"
@@ -104,15 +105,17 @@ Accept: application/json
 
 GET localhost:3003/barang/kategori/3
 Accept: application/json
+Authorization: abc123
 
 ###
 
-PUT localhost:3003/barang/kategori/3
+PUT localhost:3003/barang/kategori/1
 Content-Type: application/json
 Accept: application/json
+Authorization: abc123
 
 {
-  "nama_kategori_barang" : "obat baru anak maokma"
+  "nama_kategori_barang" : "baru anak maokma"
 }
 
 ###
@@ -135,7 +138,7 @@ Accept: application/json
 
 ###
 
-PUT localhost:3003/barang/1
+PUT localhost:3003/barang/3
 Content-Type: application/json
 Accept: application/json
 
@@ -178,9 +181,10 @@ Content-Type: application/json
 }
 
 ###
-PUT localhost:3003/barang/stok/reduce
+PUT localhost:3003/obat/stok/reduce
 Accept: application/json
 Content-Type: application/json
+Authorization: abc123
 
 //ObatID      int       `json:"obat_id"`
 //Amount      uint      `json:"amount"`
@@ -188,8 +192,9 @@ Content-Type: application/json
 
 
 {
-  "barang_id": 1,
-  "amount": 31,
+  "obat_id": 12,
+  "stok_masuk_id" : 1,
+  "amount": 1,
   "expired_date": "19-12-2025"
 }
 

@@ -27,7 +27,12 @@ func TokenLogin(ctx *fiber.Ctx) error {
 	if find == 0 || tokendata.ExpiredAt.Before(time.Now()) || !tokendata.IsEnabled {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"status": fiber.StatusUnauthorized,
-			"error":  "Your token isn't valid or already expired",
+			"error":  "Your token isn't valid or already expired ",
+			"e": fiber.Map{
+				"1": find == 0,
+				"2": tokendata.ExpiredAt.Before(time.Now()),
+				"3": !tokendata.IsEnabled,
+			},
 		})
 	} else {
 		return ctx.Next()

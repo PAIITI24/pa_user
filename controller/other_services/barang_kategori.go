@@ -5,6 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/hakushigo/pa_user/helper"
 	"github.com/hakushigo/pa_user/model/packets"
+	"strconv"
 )
 
 func ReqAddKategoriBarang(ctx *fiber.Ctx) error {
@@ -17,7 +18,7 @@ func ReqAddKategoriBarang(ctx *fiber.Ctx) error {
 		})
 	}
 
-	if !(len(input.NamaKategori) > 2) {
+	if !(len(input.NamaKategoriBarang) > 2) {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status": fiber.StatusBadRequest,
 			"error":  "The name needs to be more than 2 characters",
@@ -71,7 +72,9 @@ func ReqGetKategoriBarang(ctx *fiber.Ctx) error {
 }
 
 func ReqUpdateKategoriBarang(ctx *fiber.Ctx) error {
-	var input packets.KategoriBarang
+	var input struct {
+		NamaKategoriBarang string `json:"nama_kategori_barang"`
+	}
 
 	if err := ctx.BodyParser(&input); err != nil {
 		return ctx.Status(500).JSON(fiber.Map{
@@ -80,27 +83,28 @@ func ReqUpdateKategoriBarang(ctx *fiber.Ctx) error {
 		})
 	}
 
-	if !(len(input.NamaKategori) > 2) {
+	// check the request
+	if !(len(input.NamaKategoriBarang) > 2) {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status": fiber.StatusBadRequest,
-			"error":  "The name needs to be more than 2 characters",
+			"error":  "The name is too short",
 		})
 	}
 
-	id := ctx.Params("id")
-	agent := fiber.Put(helper.BarangServiceHostname + "/barang/kategori/" + id)
+	id, _ := ctx.ParamsInt("id")
+	agent := fiber.Put(helper.BarangServiceHostname + "/barang/kategori/" + strconv.Itoa(id))
 	agent.JSON(input)
 
-	status, body, errors := agent.Bytes()
-	if len(errors) > 0 {
+	s, b, e := agent.Bytes()
+	if len(e) > 0 {
 		return ctx.Status(500).JSON(fiber.Map{
 			"status": 500,
-			"error":  errors,
+			"error":  e,
 		})
 	}
 
 	ctx.Set("Content-Type", "application/json")
-	return ctx.Status(status).Send(body)
+	return ctx.Status(s).Send(b)
 }
 
 func ReqCountKategoriBarang(ctx *fiber.Ctx) error {

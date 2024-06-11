@@ -126,8 +126,8 @@ func ReqUpdateBarang(ctx *fiber.Ctx) error {
 	form, err := ctx.MultipartForm()
 	if err != nil {
 		return ctx.Status(500).JSON(fiber.Map{
-			"statusn": 500,
-			"error":   err.Error(),
+			"status": 500,
+			"error":  err.Error(),
 		})
 	}
 

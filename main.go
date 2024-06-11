@@ -50,6 +50,7 @@ func main() {
 	auth := server.Group("/auth")
 	auth.Post("/login", controller.Login)
 	auth.Post("/logout", controller.Logout)
+	auth.Put("/update", controller.SelfUpdateAkun)
 
 	// user
 	user := server.Group("/user", middleware.TokenLogin)
@@ -75,9 +76,13 @@ func main() {
 	obat.Put("/:id", service.ReqUpdateObat)
 	obat.Delete("/:id", service.ReqDeleteObat)
 
-	// stok barang
+	// stok obat
 	obat.Put("/stok/add", service.AddStokObat)
 	obat.Put("/stok/reduce", service.ReduceStokObat)
+	obat.Get("/stok/add/history", service.ListOStokObatMasuk)
+	obat.Get("/stok/reduce/history", service.ListStokObatKeluar)
+	obat.Get("/stok/add/history/:id", service.ListOStokObatMasukPerID)
+	obat.Get("/stok/reduce/history/:id", service.ListStokObatKeluarPerID)
 
 	// kategori barang
 	barang := server.Group("/barang", middleware.TokenLogin)
@@ -98,6 +103,11 @@ func main() {
 	// stok barang
 	barang.Put("/stok/add", service.AddStokBarang)
 	barang.Put("/stok/reduce", service.ReduceStokBarang)
+	barang.Get("/stok/add/history", service.ListOStokBarangMasuk)
+	barang.Get("/stok/reduce/history", service.ListStokBarangKeluar)
+	barang.Get("/stok/add/history/:id", service.ListOStokBarangMasukPerID)
+	barang.Get("/stok/reduce/history/:id", service.ListStokBarangKeluarPerID)
+
 
 	server.Listen(":3003")
 }

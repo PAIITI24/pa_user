@@ -40,3 +40,77 @@ func ReduceStokBarang(ctx *fiber.Ctx) error {
 	ctx.Set("Content-Type", "application/json")
 	return ctx.Status(status).Send(body)
 }
+
+func ListOStokBarangMasuk(ctx *fiber.Ctx) error {
+	// creating an agent
+	agent := fiber.Get(helper.StokBarangServiceHostname + "/barang/stok/add/history")
+	agent.Body(ctx.Body())
+
+	status, body, errs := agent.Bytes()
+
+	if len(errs) > 0 {
+		return ctx.Status(500).JSON(fiber.Map{
+			"status": 500,
+			"error":  errs,
+		})
+	}
+
+	ctx.Set("Content-Type", "application/json")
+	return ctx.Status(status).Send(body)
+}
+
+func ListOStokBarangMasukPerID(ctx *fiber.Ctx) error {
+	// creating an agent
+	var id = ctx.Params("id")
+	agent := fiber.Get(helper.StokBarangServiceHostname + "/barang/stok/add/history/" + id)
+	agent.Body(ctx.Body())
+
+	status, body, errs := agent.Bytes()
+
+	if len(errs) > 0 {
+		return ctx.Status(500).JSON(fiber.Map{
+			"status": 500,
+			"error":  errs,
+		})
+	}
+
+	ctx.Set("Content-Type", "application/json")
+	return ctx.Status(status).Send(body)
+}
+
+func ListStokBarangKeluar(ctx *fiber.Ctx) error {
+	// creating an agent
+	agent := fiber.Get(helper.StokBarangServiceHostname + "/barang/stok/reduce/history")
+	agent.Body(ctx.Body())
+
+	status, body, errs := agent.Bytes()
+
+	if len(errs) > 0 {
+		return ctx.Status(500).JSON(fiber.Map{
+			"status": 500,
+			"error":  errs,
+		})
+	}
+
+	ctx.Set("Content-Type", "application/json")
+	return ctx.Status(status).Send(body)
+}
+
+func ListStokBarangKeluarPerID(ctx *fiber.Ctx) error {
+	// creating an agent
+	var id = ctx.Params("id")
+	agent := fiber.Get(helper.StokBarangServiceHostname + "/barang/stok/reduce/history/" + id)
+	agent.Body(ctx.Body())
+
+	status, body, errs := agent.Bytes()
+
+	if len(errs) > 0 {
+		return ctx.Status(500).JSON(fiber.Map{
+			"status": 500,
+			"error":  errs,
+		})
+	}
+
+	ctx.Set("Content-Type", "application/json")
+	return ctx.Status(status).Send(body)
+}

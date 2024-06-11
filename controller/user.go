@@ -104,6 +104,7 @@ func Login(ctx *fiber.Ctx) error {
 				"user": fiber.Map{
 					"email": foundUser.Email,
 					"role":  foundUser.Role,
+					"id":    foundUser.Id,
 				},
 			})
 		}
@@ -202,6 +203,69 @@ func ListStaff(ctx *fiber.Ctx) error {
 			"message": "You are not allowed to access this entry",
 		})
 	}
+}
+
+func SelfUpdateAkun(ctx *fiber.Ctx) error {
+	var tokendata model.Token
+	Token := ctx.Get("Authorization")
+
+	// Retrieve the updated staff data from the request body
+	var updatedUserData model.User
+	if err := ctx.BodyParser(&updatedUserData); err != nil {
+		return ctx.Status(500).JSON(fiber.Map{
+			"status": 500,
+			"error":  err,
+		})
+	}
+
+	// Fetch the token data and associated user
+	find := db.Model(&model.Token{}).Preload("User").Where(model.Token{
+		Token: Token,
+	}).Find(&tokendata)
+
+	if find.Error != nil {
+		return ctx.Status(500).JSON(fiber.Map{
+			"status": 500,
+			"error":  find.Error.Error(),
+		})
+	}
+
+	// Fetch the existing user data from the database
+	var existingUser model.User
+	search := db.Where(model.User{Id: tokendata.User.Id}).First(&existingUser)
+	if search.Error != nil || search.RowsAffected == 0 {
+		return ctx.Status(404).JSON(fiber.Map{
+			"status":  404,
+			"message": "User not found",
+		})
+	}
+
+	// Update the user data
+	existingUser.Name = updatedUserData.Name
+	existingUser.Email = updatedUserData.Email
+	if updatedUserData.Password != "" {
+		hashedPassword, err := helper.PasswordHash(updatedUserData.Password)
+		if err != nil {
+			return ctx.Status(500).JSON(fiber.Map{
+				"status": 500,
+				"error":  "Error hashing password: " + err.Error(),
+			})
+		}
+		existingUser.Password = hashedPassword
+	}
+
+	// Save the updated user data to the database
+	if err := db.Save(&existingUser).Error; err != nil {
+		return ctx.Status(500).JSON(fiber.Map{
+			"status": 500,
+			"error":  "Database error: " + err.Error(),
+		})
+	}
+
+	return ctx.Status(200).JSON(fiber.Map{
+		"status": 200,
+		"user":   existingUser,
+	})
 }
 
 func UpdateStaff(ctx *fiber.Ctx) error {
